@@ -53,3 +53,7 @@ src: ./pages/02_akawaka.md
 ---
 src: ./pages/03_monofony.md
 ---
+
+---
+src: ./pages/04_sylius_stack.md
+---
