@@ -1,4 +1,4 @@
-# History
+# Sylius technical history
 
 Back in 2013 - Before Bootstrap 3 migration
 
@@ -46,10 +46,27 @@ Back in 2016 - Grids
 
 
 ---
+layout: quote
+---
+
+Paweł Jędrzejewski wrote
+
+<v-clicks>
+
+* Standalone Grid component, decoupled from persistence with a system of drivers.
+* Standalone SyliusGridBundle, decoupled from SyliusResourceBundle.
+* SyliusResourceBundle does not force you to use GridBundle.
+* Doctrine ORM and Doctrine DBAL drivers for SyliusGridBundle, later I plan to have ElasticSearchDriver.
+* Super easy to introduce new drivers, filters, columns and customize rendering of every single part;
+* Pretty much everything is optional, you are not forced to use columns, filters, actions or even the future rendering part if you don't like it.
+
+</v-clicks>
+
+---
 
 Back in 2016 - Grid definition
 
-```yaml
+```yaml {all|3|4-7|8-9|10-19|11-12|14-15|14-15,18-19|17|20-23}
 sylius_grid:
     grids:
         sylius_admin_tax_category:
@@ -82,7 +99,7 @@ sylius_grid:
 
 Back in 2016 - Grid definition
 
-```yaml
+```yaml {all|5-13|6|7-8|9|10-11|12-13}
 sylius_grid:
     grids:
         sylius_admin_tax_category:
@@ -102,7 +119,7 @@ sylius_grid:
 
 Back in 2016 - Route with grid
 
-```yaml
+```yaml {all|3|5|6|8}
 sylius_admin_tax_category:
     resource: |
         alias: sylius.tax_category
@@ -149,8 +166,21 @@ Back in 2016 - Semantic UI & Generic templates
 <img class="w-150" src="/generic_templates.png"/>
 
 ---
+layout: quote
+---
 
-```twig
+Paweł Jędrzejewski wrote
+
+I started preparing generic __CRUD templates with AdminLTE__ and it is far from perfect. 
+The css/html is not that nice and __Bootstrap is getting slowly out-dated__. 
+I discovered http://semantic-ui.com/, which provides tons of components out of the box that we can find useful both for admin and shop interface. 
+Just have a look around the docs. 
+Also it is actually much easier to learn.
+__These components give us a lot of power both for Sylius itself as well as for customizing the admin/shop__.
+
+---
+
+```twig {all|2|4-5|10-11|13-22|15-16|17-18}
 <!-- src/Sylius/Bundle/AdminBundle/Resources/views/Crud/create.html.twig -->
 {% extends 'SyliusAdminBundle::layout.html.twig' %}
 
@@ -178,7 +208,7 @@ Back in 2016 - Semantic UI & Generic templates
 
 ---
 
-```twig
+```twig {all|2|6|10-19|21-25}
 <!-- src/Sylius/Bundle/AdminBundle/Resources/views/Crud/index.html.twig -->
 {% extends 'SyliusAdminBundle::layout.html.twig' %}
 
@@ -213,3 +243,11 @@ Back in 2016 - Semantic UI & Generic templates
 Back in 2019 - Templates events
 
 <img class="w-150" src="/template_events.png"/>
+
+---
+layout: quote
+---
+
+Kamil Kokot wrote
+
+This PR aims to __replace our current template events__ system using __Sonata Block bundle__ and improve both the __developer experience__ using it and __Sylius extendability__, especially in the light of __Sylius Store__ which has been recently opened.
