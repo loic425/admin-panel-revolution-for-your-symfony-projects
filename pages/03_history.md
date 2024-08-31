@@ -250,4 +250,4 @@ layout: quote
 
 Kamil Kokot wrote
 
-This PR aims to __replace our current template events__ system using __Sonata Block bundle__ and improve both the __developer experience__ using it and __Sylius extendability__, especially in the light of __Sylius Store__ which has been recently opened.
+This PR aims to __replace our current template events system using Sonata Block bundle__ and improve both the __developer experience__ using it and __Sylius extendability__, especially in the light of __Sylius Store__ which has been recently opened.
