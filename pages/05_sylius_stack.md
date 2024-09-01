@@ -264,3 +264,200 @@ Generic update template
 {% endblock %}
 
 ```
+
+---
+layout: center
+---
+
+Let's create an AFUP admin panel
+
+---
+
+Create a speaker entity
+```shell
+symfony console make:entity Speaker
+```
+
+- firstName
+- lastName
+- companyName
+- avatar
+
+Create a speaker form type
+```php
+symfony console make:form SpeakerType Speaker
+```
+
+Create a speaker grid
+```php
+symfony console make:grid Speaker
+```
+
+---
+
+Declare entity as a Sylius resource
+& add your basic operations
+
+```php {all|2|3|4|5|6|7-13|8|9|10|11|12|15}
+#[ORM\Entity(repositoryClass: SpeakerRepository::class)]
+#[AsResource(
+    section: 'admin',
+    formType: SpeakerType::class,
+    templatesDir: '@SyliusAdminUi/crud',
+    routePrefix: '/admin',
+    operations: [
+        new Create(),
+        new Update(),
+        new Index(grid: SpeakerGrid::class),
+        new Delete(),
+        new BulkDelete(),
+    ],
+)]
+class Speaker implements ResourceInterface
+```
+
+---
+
+Generated grid
+
+<img src="/admin_ui_speakers.png" />
+
+---
+
+No filters by default
+
+<img class="w-100" src="/admin_ui_no_filters.png" />
+
+---
+
+Adding a search filter
+
+```php
+<?php
+// src/Grid/SpeakerGrid.php
+
+namespace App\Grid;
+
+// ...
+
+final class SpeakerGrid extends AbstractGrid implements ResourceAwareGridInterface
+{
+    // ...
+
+    public function buildGrid(GridBuilderInterface $gridBuilder): void
+    {
+        $gridBuilder
+            ->addFilter(
+                StringFilter::create('search', ['firstName', 'lastName', 'companyName'])
+                    ->setLabel('sylius.ui.search')
+            )
+            // ...
+        ;
+    }
+
+    // ...
+}
+
+```
+
+---
+
+<img src="/admin_ui_with_filters.png" />
+
+---
+
+Adding a default sorting
+
+```php {all|17|16-17}
+<?php
+
+// ...
+
+final class SpeakerGrid extends AbstractGrid implements ResourceAwareGridInterface
+{
+    // ...
+
+    public function buildGrid(GridBuilderInterface $gridBuilder): void
+    {
+        $gridBuilder
+            ->addFilter(
+                StringFilter::create('search', ['firstName', 'lastName', 'companyName'])
+                    ->setLabel('sylius.ui.search')
+            )
+            // Currently, sorting doesn't work if there is no default sorting
+            ->addOrderBy('firstName', 'asc')
+            // ...
+        ;
+    }
+
+    // ...
+}
+
+```
+
+---
+
+Sorted by first name
+
+<img src="/admin_ui_default_sorting.png" />
+
+---
+
+Sorted by company name
+
+<img src="/admin_ui_sorted_by_company_name.png" />
+
+
+---
+
+Adding an image for the speaker avatar
+
+```php {all|6-9|6|7|8}
+// ...
+    public function buildGrid(GridBuilderInterface $gridBuilder): void
+    {
+        $gridBuilder
+            // ...
+            ->addField(
+                TwigField::create('avatar', 'speaker/grid/field/image.html.twig')
+                    ->setPath('.')
+            )
+            // ...
+        ;
+    }
+// ...
+
+```
+
+```twig {all|2|4|5}
+<!-- templates/speaker/grid/field/image.html.twig -->
+{% import '@SyliusBootstrapTheme/shared/helper/avatar.html.twig' as avatar %}
+
+{% set avatar_path = data.avatar.path is defined ? vich_uploader_asset(data.avatar) : null %}
+{{ avatar.default(avatar_path, 'img-thumbnail') }}
+```
+
+---
+
+<img src="/admin_ui_speaker_avatars.png" />
+
+---
+
+Create a talk entity
+```shell
+symfony console make:entity Talk
+```
+
+- title
+- description
+- speaker
+
+Create a talk form type
+```php
+symfony console make:form TalkType Talk
+```
+
+Create a talk grid
+```php
+symfony console make:grid Talk
+```
