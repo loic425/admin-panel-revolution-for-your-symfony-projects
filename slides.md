@@ -65,3 +65,7 @@ src: ./pages/05_sylius_stack.md
 ---
 src: ./pages/06_real_use_case.md
 ---
+
+---
+src: ./pages/07_symfony_ux.md
+---
