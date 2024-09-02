@@ -69,3 +69,7 @@ src: ./pages/06_real_use_case.md
 ---
 src: ./pages/07_symfony_ux.md
 ---
+
+---
+src: ./pages/08_conclusion.md
+---
