@@ -352,6 +352,8 @@ final class SpeakerGrid extends AbstractGrid implements ResourceAwareGridInterfa
 ```
 
 ---
+transition: fade
+---
 
 Link to speaker talks
 

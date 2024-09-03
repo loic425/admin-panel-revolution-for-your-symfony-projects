@@ -99,6 +99,8 @@ class TalkType extends AbstractType
 ```
 
 ---
+transition: fade
+---
 
 Speaker Autocomplete on talk form type
 
