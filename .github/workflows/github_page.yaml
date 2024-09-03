@@ -25,7 +25,7 @@ jobs:
       - name: Install and Build 🔧
         run: |
           npm ci
-          npx slidev build --base=/resource-revolution-2/
+          npx slidev build --base=/admin-panel-revolution-for-your-symfony-projects/
 
       - name: Deploy on GitHub Pages 🚀
         uses: crazy-max/ghaction-github-pages@v3.0.0
