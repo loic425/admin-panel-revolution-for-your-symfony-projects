@@ -70,12 +70,8 @@ No filters by default
 
 Adding a search filter
 
-```php
-<?php
+```php {all|10-14|11|12|13}
 // src/Grid/SpeakerGrid.php
-
-namespace App\Grid;
-
 // ...
 
 final class SpeakerGrid extends AbstractGrid implements ResourceAwareGridInterface
@@ -133,6 +129,8 @@ final class SpeakerGrid extends AbstractGrid implements ResourceAwareGridInterfa
 
 ```
 
+---
+transition: fade
 ---
 
 Sorted by first name
