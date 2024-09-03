@@ -69,7 +69,7 @@ Editing existing item
 
 Configure your resource
 
-```php
+```php {all|10|12|13|15-21}
 namespace App\Entity;
 
 use App\Grid\BookGrid;
@@ -102,7 +102,7 @@ class Book implements ResourceInterface
 
 Generic index template
 
-```twig
+```twig {all|1|4-7|9-10|12-14|16-19|21-25}
 {% extends '@SyliusAdminUi/base.html.twig' %}
 
 {% set metadata = resource_metadata|default(metadata) %}
@@ -129,6 +129,9 @@ Generic index template
 {% endblock %}
 ```
 
+---
+drawings:
+    persist: true
 ---
 
 <img src="/admin_ui_index_hooks.png"/>
