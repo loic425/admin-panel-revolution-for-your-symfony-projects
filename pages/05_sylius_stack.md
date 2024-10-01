@@ -144,7 +144,7 @@ __Hook__
 
 ```yaml {all|2|3|4|5|6}
 ## config/packages/twig_hooks.yaml
-twig_hooks:
+sylius_twig_hooks:
     hooks:
         'sylius_admin.book.index.content.header':
             description:
@@ -176,7 +176,7 @@ __Hook__
 
 ```yaml {all|4|5|6}
 ## config/packages/twig_hooks.yaml
-twig_hooks:
+sylius_twig_hooks:
     hooks:
         'sylius_admin.common.component.sidebar':
             logo:

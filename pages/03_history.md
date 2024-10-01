@@ -62,96 +62,171 @@ Paweł Jędrzejewski wrote
 
 </v-clicks>
 
----
+[//]: # (---)
 
-Back in 2016 - Grid definition
+[//]: # ()
+[//]: # (Back in 2016 - Grid definition)
 
-```yaml {all|3|4-7|8-9|10-19|11-12|14-15|14-15,18-19|17|20-23}
-sylius_grid:
-    grids:
-        sylius_admin_tax_category:
-            driver:
-                name: doctrine/orm
-                options:
-                    class: '%sylius.model.tax_category.class%'
-            sorting:
-                name: asc
-            fields:
-                code:
-                    type: string
-                    label: sylius.ui.code
-                nameAndDescription:
-                    type: twig
-                    label: sylius.ui.name
-                    path: .
-                    options:
-                        template: SyliusAdminBundle:Grid/Field:nameAndDescription.html.twig
-            filters:
-                name:
-                    type: string
-                    label: sylius.ui.name
-                code:
-                    type: string
-                    label: sylius.ui.code
-```
+[//]: # ()
+[//]: # (```yaml {all|3|4-7|8-9|10-19|11-12|14-15|14-15,18-19|17|20-23})
 
----
+[//]: # (sylius_grid:)
 
-Back in 2016 - Grid definition
+[//]: # (    grids:)
 
-```yaml {all|5-13|6|7-8|9|10-11|12-13}
-sylius_grid:
-    grids:
-        sylius_admin_tax_category:
-            # ...
-            actions:
-                main:
-                    create:
-                        type: create
-                item:
-                    update:
-                        type: update
-                    delete:
-                        type: delete
-```
+[//]: # (        sylius_admin_tax_category:)
 
----
+[//]: # (            driver:)
 
-Back in 2016 - Route with grid
+[//]: # (                name: doctrine/orm)
 
-```yaml {all|3|5|6|8}
-sylius_admin_tax_category:
-    resource: |
-        alias: sylius.tax_category
-        section: admin
-        templates: SyliusAdminBundle:Crud
-        except: ['show']
-        redirect: update
-        grid: sylius_admin_tax_category
-        vars:
-          all:
-              subheader: sylius.ui.manage_taxation_of_your_products
-              templates:
-                  form: SyliusAdminBundle:TaxCategory:_form.html.twig
-          index:
-              icon: tags
-    type: sylius.resource
-```
+[//]: # (                options:)
 
----
+[//]: # (                    class: '%sylius.model.tax_category.class%')
 
-Back in 2016 - Route with grid (on API)
+[//]: # (            sorting:)
 
-```yaml
-sylius_api_tax_category:
-    resource: '@SyliusApiBundle/Resources/config/routing/tax_category.yml'
-    prefix: /tax-categories
-    resource: |
-        alias: sylius.tax_category
-        section: api
-        grid: sylius_admin_tax_category
-    type: sylius.resource_api
-```
+[//]: # (                name: asc)
+
+[//]: # (            fields:)
+
+[//]: # (                code:)
+
+[//]: # (                    type: string)
+
+[//]: # (                    label: sylius.ui.code)
+
+[//]: # (                nameAndDescription:)
+
+[//]: # (                    type: twig)
+
+[//]: # (                    label: sylius.ui.name)
+
+[//]: # (                    path: .)
+
+[//]: # (                    options:)
+
+[//]: # (                        template: SyliusAdminBundle:Grid/Field:nameAndDescription.html.twig)
+
+[//]: # (            filters:)
+
+[//]: # (                name:)
+
+[//]: # (                    type: string)
+
+[//]: # (                    label: sylius.ui.name)
+
+[//]: # (                code:)
+
+[//]: # (                    type: string)
+
+[//]: # (                    label: sylius.ui.code)
+
+[//]: # (```)
+
+[//]: # (---)
+
+[//]: # ()
+[//]: # (Back in 2016 - Grid definition)
+
+[//]: # ()
+[//]: # (```yaml {all|5-13|6|7-8|9|10-11|12-13})
+
+[//]: # (sylius_grid:)
+
+[//]: # (    grids:)
+
+[//]: # (        sylius_admin_tax_category:)
+
+[//]: # (            # ...)
+
+[//]: # (            actions:)
+
+[//]: # (                main:)
+
+[//]: # (                    create:)
+
+[//]: # (                        type: create)
+
+[//]: # (                item:)
+
+[//]: # (                    update:)
+
+[//]: # (                        type: update)
+
+[//]: # (                    delete:)
+
+[//]: # (                        type: delete)
+
+[//]: # (```)
+
+[//]: # (---)
+
+[//]: # ()
+[//]: # (Back in 2016 - Route with grid)
+
+[//]: # ()
+[//]: # (```yaml {all|3|5|6|8})
+
+[//]: # (sylius_admin_tax_category:)
+
+[//]: # (    resource: |)
+
+[//]: # (        alias: sylius.tax_category)
+
+[//]: # (        section: admin)
+
+[//]: # (        templates: SyliusAdminBundle:Crud)
+
+[//]: # (        except: ['show'])
+
+[//]: # (        redirect: update)
+
+[//]: # (        grid: sylius_admin_tax_category)
+
+[//]: # (        vars:)
+
+[//]: # (          all:)
+
+[//]: # (              subheader: sylius.ui.manage_taxation_of_your_products)
+
+[//]: # (              templates:)
+
+[//]: # (                  form: SyliusAdminBundle:TaxCategory:_form.html.twig)
+
+[//]: # (          index:)
+
+[//]: # (              icon: tags)
+
+[//]: # (    type: sylius.resource)
+
+[//]: # (```)
+
+[//]: # (---)
+
+[//]: # ()
+[//]: # (Back in 2016 - Route with grid &#40;on API&#41;)
+
+[//]: # ()
+[//]: # (```yaml)
+
+[//]: # (sylius_api_tax_category:)
+
+[//]: # (    resource: '@SyliusApiBundle/Resources/config/routing/tax_category.yml')
+
+[//]: # (    prefix: /tax-categories)
+
+[//]: # (    resource: |)
+
+[//]: # (        alias: sylius.tax_category)
+
+[//]: # (        section: api)
+
+[//]: # (        grid: sylius_admin_tax_category)
+
+[//]: # (    type: sylius.resource_api)
+
+[//]: # (```)
 
 ---
 layout: cover

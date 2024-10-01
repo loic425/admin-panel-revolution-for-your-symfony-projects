@@ -48,13 +48,12 @@ Speaker filter with autocompletion
 
 Creating a Speaker Autocomplete to use on forms
 
-```php {all|4|5|6|8|13|14|18-21}
+```php {all|4|5|7|12|13|17-20}
 // src/Form/SpeakerAutocompleteType.php
 // ...
 
 #[AsEntityAutocompleteField(
     alias: 'app_admin_speaker',
-    route: 'sylius_admin_entity_autocomplete',
 )]
 final class SpeakerAutocompleteType extends AbstractType
 {
@@ -78,7 +77,7 @@ final class SpeakerAutocompleteType extends AbstractType
 
 Speaker Autocomplete on talk form type
 
-```php {all|11}
+```php {all|10}
 // src/Form/TalkType.php
 // ...
 

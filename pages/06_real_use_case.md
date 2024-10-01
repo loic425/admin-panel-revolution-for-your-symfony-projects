@@ -102,7 +102,7 @@ final class SpeakerGrid extends AbstractGrid implements ResourceAwareGridInterfa
 
 Adding a default sorting
 
-```php {all|17|16-17}
+```php {all|16}
 <?php
 
 // ...
@@ -118,7 +118,6 @@ final class SpeakerGrid extends AbstractGrid implements ResourceAwareGridInterfa
                 StringFilter::create('search', ['firstName', 'lastName', 'companyName'])
                     ->setLabel('sylius.ui.search')
             )
-            // Currently, sorting doesn't work if there is no default sorting
             ->addOrderBy('firstName', 'asc')
             // ...
         ;
@@ -167,7 +166,7 @@ Adding an image for the speaker avatar
 
 ```twig {all|2|4|5}
 <!-- templates/speaker/grid/field/image.html.twig -->
-{% import '@SyliusBootstrapTheme/shared/helper/avatar.html.twig' as avatar %}
+{% import '@SyliusBootstrapAdminUi/shared/helper/avatar.html.twig' as avatar %}
 
 {% set avatar_path = data.avatar.path is defined ? vich_uploader_asset(data.avatar) : null %}
 {{ avatar.default(avatar_path, 'img-thumbnail') }}

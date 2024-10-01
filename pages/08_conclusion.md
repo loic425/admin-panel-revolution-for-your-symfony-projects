@@ -19,6 +19,7 @@ image: /profiler.png
     - Resource detached from the Doctrine entity
     - Query bus on providers
     - Command bus on processors
+- Installable on existing projects  
 
 </v-clicks>
 
@@ -28,8 +29,10 @@ image: /profiler.png
 
 <v-clicks>
 
-- Reviewing Sylius stack new packages
 - Admin login page
+- Minimal dashboard page
+- Navbar (with logout link)
+- Flex recipes
 - Grid with UX Live Component
 - Using these packages on Monofony
 - Using these packages on Sylius E-commerce
