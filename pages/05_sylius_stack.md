@@ -130,11 +130,8 @@ Generic index template
 ```
 
 ---
-drawings:
-    persist: true
----
 
-<img src="/admin_ui_index_hooks.png"/>
+<img src="/admin_ui_index_hooks_with_focus.png"/>
 
 ---
 
@@ -167,6 +164,10 @@ __Template__
 ---
 
 <img src="/admin_ui_index_hooks_result.png"/>
+
+---
+
+<img src="/admin_ui_index_hooks_result_debug.png"/>
 
 ---
 

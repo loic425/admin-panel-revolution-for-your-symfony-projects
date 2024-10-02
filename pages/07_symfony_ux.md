@@ -110,3 +110,137 @@ Speaker Autocomplete on talk form type
 Speaker Autocomplete on talk form type
 
 <img src="/form_type_with_ux_autocomplete.png" />
+
+---
+
+Talk can have multiple speakers
+
+```php {all|10|12|13|14|15}
+// src/Form/TalkType.php
+// ...
+
+class TalkType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            // ...
+            ->add('speakers', LiveCollectionType::class, [
+                'label' => 'app.ui.speakers',
+                'entry_type' => SpeakerAutocompleteType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+            ])
+            // ...
+        ;
+    }
+
+    // ...
+}
+
+```
+
+---
+
+```php {all|4,9|7,12|6,13|3,14|16-17|19-22}
+// src/Twig/Component/TalkFormComponent.php
+// ...
+use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
+use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
+use Symfony\UX\LiveComponent\Attribute\LiveProp;
+use Symfony\UX\LiveComponent\DefaultActionTrait;
+use Symfony\UX\LiveComponent\LiveCollectionTrait;
+
+#[AsLiveComponent(template: '@SyliusBootstrapAdminUi/shared/crud/common/content/form.html.twig')]
+class TalkFormComponent extends AbstractController
+{
+    use LiveCollectionTrait;
+    use DefaultActionTrait;
+    use HookableLiveComponentTrait;
+
+    #[LiveProp]
+    public Talk $initialFormData;
+
+    protected function instantiateForm(): FormInterface
+    {
+        return $this->createForm(TalkType::class, $this->initialFormData);
+    }
+}
+
+```
+
+---
+
+```yaml {all|6|7|8|9|10|11|13}
+# config/packages/twig_hooks.yaml
+sylius_twig_hooks:
+    hooks:
+        # ...
+
+        'sylius_admin.talk.create.content':
+            form:
+                component: 'App\Twig\Component\TalkFormComponent'
+                props:
+                    form: '@=_context.form'
+                    initialFormData: '@=_context.resource'
+
+        'sylius_admin.talk.update.content':
+            form:
+                component: 'App\Twig\Component\TalkFormComponent'
+                props:
+                    form: '@=_context.form'
+                    initialFormData: '@=_context.resource'
+
+```
+
+---
+
+<img src="/live-collection.png"/>
+
+---
+layout: center
+---
+
+Two more filters...
+
+---
+
+```php {all|3,14-17|18-25}
+// src/Grid/TalkGrid.php
+// ...
+use Sylius\Bundle\GridBundle\Builder\Filter\DateFilter;
+use Sylius\Bundle\GridBundle\Builder\Filter\EntityFilter;
+
+final class TalkGrid extends AbstractGrid implements ResourceAwareGridInterface
+{
+    // ...
+
+    public function buildGrid(GridBuilderInterface $gridBuilder): void
+    {
+        $gridBuilder
+            // ...
+            ->addFilter(
+                DateFilter::create('startsAt')
+                    ->setLabel('app.ui.starts_at'),
+            )
+            ->addFilter(
+                SelectFilter::create('track', [
+                    'app.ui.biz' => Track::BIZ->value,
+                    'app.ui.tech_one' => Track::TECH_ONE->value,
+                    'app.ui.tech_two' => Track::TECH_TWO->value,
+                ])
+                    ->setLabel('app.ui.track'),
+            )
+            // ...
+        ;
+    }
+
+    // ...
+}
+
+```
+
+---
+
+<img src="/last-filters.png"/>
