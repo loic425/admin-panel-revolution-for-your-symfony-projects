@@ -29,9 +29,6 @@ image: /profiler.png
 
 <v-clicks>
 
-- Admin login page
-- Minimal dashboard page
-- Navbar (with logout link)
 - Flex recipes
 - Grid with UX Live Component
 - Using these packages on Monofony
