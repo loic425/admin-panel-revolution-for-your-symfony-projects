@@ -173,7 +173,7 @@ class TalkFormComponent extends AbstractController
 ---
 
 ```yaml {all|6|7|8|9|10|11|13}
-# config/packages/twig_hooks.yaml
+## config/packages/twig_hooks.yaml
 sylius_twig_hooks:
     hooks:
         # ...
