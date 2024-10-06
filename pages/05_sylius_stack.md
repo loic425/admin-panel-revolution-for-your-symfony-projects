@@ -131,6 +131,28 @@ Generic index template
 
 ---
 
+Twig hooks overview
+
+```yaml {all|1|2-3|4-5|6-8|9-10|11-13|14-16}
+Hook 'index':
+    sidebar:
+        template: 'index/sidebar.html.twig'
+    navbar:
+        template: 'index/navbar.html.twig'    
+    content:
+        template: 'index/content.html.twig'
+        hook 'content':
+            flashes: 
+                template: 'index/content/flashes.html.twig'
+            header:
+                template: 'index/content/header.html.twig'
+                # this template contains another hook...
+            grid:
+                template: 'index/content/grid.html.twig'
+                # this template contains another hook...
+```                
+---
+
 <img src="/admin_ui_index_hooks_with_focus.png"/>
 
 ---
