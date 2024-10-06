@@ -30,9 +30,9 @@ image: /profiler.png
 <v-clicks>
 
 - Flex recipes
-- Grid with UX Live Component
 - Using these packages on Monofony
 - Using these packages on Sylius E-commerce
+- Grid with UX Live Component
 
 </v-clicks>
 

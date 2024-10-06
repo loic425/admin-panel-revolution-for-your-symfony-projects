@@ -29,6 +29,12 @@ hideInToc: true
 $ composer create-project monofony/skeleton project_name
 ```
 
+You can also add some security endpoints with optional api-pack
+```shell
+$ composer require monofony/api-pack
+```
+
+
 <!--
 To set up the project, there is a skeleton which uses Flex to copy some basic features into your project.
 -->

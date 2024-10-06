@@ -8,35 +8,11 @@ Back in 2013 - Before Bootstrap 3 migration
 
 ---
 
-Back in 2013 - Before Bootstrap 3 migration
-
-<!-- https://github.com/Sylius/Sylius/pull/368 -->
-
-<img class="w-200" src="/bootstrap2-products.jpeg"/>
-
----
-
 Back in 2013 - After Bootstrap 3 migration
 
 <!-- https://github.com/Sylius/Sylius/pull/368 -->
 
 <img class="w-200" src="/bootstrap3-users.jpeg"/>
-
----
-
-Back in 2013 - After Bootstrap 3 migration
-
-<!-- https://github.com/Sylius/Sylius/pull/368 -->
-
-<img class="w-200" src="/bootstrap3-products.jpeg"/>
-
----
-
-Back in 2013 - After Bootstrap 3 migration
-
-<!-- https://github.com/Sylius/Sylius/pull/368 -->
-
-<img class="w-200" src="/bootstrap3-login.jpeg"/>
 
 ---
 
@@ -58,7 +34,6 @@ Paweł Jędrzejewski wrote
 * SyliusResourceBundle does not force you to use GridBundle.
 * Doctrine ORM and Doctrine DBAL drivers for SyliusGridBundle, later I plan to have ElasticSearchDriver.
 * Super easy to introduce new drivers, filters, columns and customize rendering of every single part;
-* Pretty much everything is optional, you are not forced to use columns, filters, actions or even the future rendering part if you don't like it.
 
 </v-clicks>
 
