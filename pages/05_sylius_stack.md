@@ -133,27 +133,56 @@ Generic index template
 
 Twig hooks overview
 
-```yaml {all|1|2-3|4-5|6-8|9-10|11-13|14-16}
-Hook 'index':
+```yaml {all|2|3-4|5-6|7-9|11-12|13-14|15-17|18-20}
+# Hook 'index'
+'sylius_admin.common.index': 
     sidebar:
-        template: 'index/sidebar.html.twig'
+        template: '[...]/index/sidebar.html.twig'
     navbar:
-        template: 'index/navbar.html.twig'    
+        template: '[...]/index/navbar.html.twig'    
     content:
-        template: 'index/content.html.twig'
-        hook 'content':
-            flashes: 
-                template: 'index/content/flashes.html.twig'
-            header:
-                template: 'index/content/header.html.twig'
-                # this template contains another hook...
-            grid:
-                template: 'index/content/grid.html.twig'
-                # this template contains another hook...
+        template: '[...]/index/content.html.twig'
+        # this template contains 'content' hook 
+      
+# hook 'content'        
+'sylius_admin.common.index.content':    
+    flashes: 
+        template: '[...]/index/content/flashes.html.twig'
+    header:
+        template: '[...]/index/content/header.html.twig'
+        # this template contains 'header' hook 
+    grid:
+        template: '[...]/index/content/grid.html.twig'
+        # this template contains 'grid' hook
 ```                
 ---
 
+Debugging with profiler
+
 <img src="/admin_ui_index_hooks_with_focus.png"/>
+
+---
+
+Hooking the header
+<img src="/focused_hook.png" width="700"/>
+
+
+
+```yaml {all|1-6|8-13|2}
+# Hook 'header'
+'sylius_admin.[book/common].index.content.header':  
+    breadcrumbs:
+        template: '[...]/header/breadcrumbs.html.twig'
+    title_block:
+        template: '[...]/header/title_block.html.twig' 
+        
+# Hook 'title_block'
+'sylius_admin.[book/common].index.content.header.title_block':
+    title: 
+        template: '[...]/header/title_block/title.html.twig'
+    actions:
+        template: '[...]/header/title_block/actions.html.twig'
+```    
 
 ---
 
@@ -161,7 +190,7 @@ Hooking templates to add data to the book index template
 
 __Hook__
 
-```yaml {all|2|3|4|5|6}
+```yaml {all|4|5|6}
 ## config/packages/twig_hooks.yaml
 sylius_twig_hooks:
     hooks:
