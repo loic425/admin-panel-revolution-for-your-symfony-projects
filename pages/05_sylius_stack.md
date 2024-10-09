@@ -134,7 +134,7 @@ Generic index template
 Twig hooks overview
 
 ```yaml {all|2|3-4|5-6|7-9|11-12|13-14|15-17|18-20}
-# Hook 'index'
+## Hook 'index'
 'sylius_admin.common.index': 
     sidebar:
         template: '[...]/index/sidebar.html.twig'
@@ -144,7 +144,7 @@ Twig hooks overview
         template: '[...]/index/content.html.twig'
         # this template contains 'content' hook 
       
-# hook 'content'        
+## hook 'content'        
 'sylius_admin.common.index.content':    
     flashes: 
         template: '[...]/index/content/flashes.html.twig'
@@ -169,14 +169,14 @@ Hooking the header
 
 
 ```yaml {all|1-6|8-13|2}
-# Hook 'header'
+## Hook 'header'
 'sylius_admin.[book/common].index.content.header':  
     breadcrumbs:
         template: '[...]/header/breadcrumbs.html.twig'
     title_block:
         template: '[...]/header/title_block.html.twig' 
         
-# Hook 'title_block'
+## Hook 'title_block'
 'sylius_admin.[book/common].index.content.header.title_block':
     title: 
         template: '[...]/header/title_block/title.html.twig'
