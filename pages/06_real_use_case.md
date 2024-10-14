@@ -3,11 +3,13 @@ layout: center
 ---
 
 # Real use case
+
 Let's create an AFUP admin panel
 
 ---
 
 Create a speaker entity
+
 ```shell
 symfony console make:entity Speaker
 ```
@@ -21,12 +23,51 @@ symfony console make:entity Speaker
 
 ---
 
-Create a speaker form type
-```php
-symfony console make:form SpeakerType Speaker
+Create a speaker avatar entity
+
+```shell
+symfony console make:entity SpeakerAvatar
 ```
 
+| Name | Type        | Nullable |
+|------|-------------|----------|
+| file | SplFileInfo | no       |
+
+---
+
+Create a speaker form type
+
+```php{all|1|2}
+symfony console make:form SpeakerType Speaker
+symfony console make:form SpeakerAvatarType SpeakerAvatar
+```
+
+---
+
+Adapt the speaker form type
+
+```php{all|8-10}
+// ...
+class SpeakerType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            // ...
+            ->add('avatar', SpeakerAvatarType::class, [
+                'required' => false,
+            ])
+            // ...
+        ;
+    }
+    // ...
+}
+```
+
+---
+
 Create a speaker grid
+
 ```php
 symfony console make:grid Speaker
 ```
@@ -82,7 +123,7 @@ final class SpeakerGrid extends AbstractGrid implements ResourceAwareGridInterfa
     {
         $gridBuilder
             ->addFilter(
-                StringFilter::create('search', ['firstName', 'lastName', 'companyName'])
+                StringFilter::create(name: 'search', fields: ['firstName', 'lastName', 'companyName'])
                     ->setLabel('sylius.ui.search')
             )
             // ...
@@ -102,7 +143,7 @@ final class SpeakerGrid extends AbstractGrid implements ResourceAwareGridInterfa
 
 Adding a default sorting
 
-```php {all|16}
+```php {all|13}
 <?php
 
 // ...
@@ -114,10 +155,7 @@ final class SpeakerGrid extends AbstractGrid implements ResourceAwareGridInterfa
     public function buildGrid(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->addFilter(
-                StringFilter::create('search', ['firstName', 'lastName', 'companyName'])
-                    ->setLabel('sylius.ui.search')
-            )
+            // ...
             ->addOrderBy('firstName', 'asc')
             // ...
         ;
@@ -147,21 +185,18 @@ Sorted by company name
 
 Adding an image for the speaker avatar
 
-```php {all|6-9|6|7|8}
-// ...
-    public function buildGrid(GridBuilderInterface $gridBuilder): void
-    {
-        $gridBuilder
-            // ...
-            ->addField(
-                TwigField::create('avatar', 'speaker/grid/field/image.html.twig')
-                    ->setPath('.')
-            )
-            // ...
-        ;
-    }
-// ...
-
+```php {all|5-8|5|6|7}
+public function buildGrid(GridBuilderInterface $gridBuilder): void
+{
+    $gridBuilder
+        // ...
+        ->addField(
+            TwigField::create(name: 'avatar', template: 'speaker/grid/field/image.html.twig')
+                ->setPath('.') // "speaker" instance instead of "speaker.avatar"
+        )
+        // ...
+    ;
+}
 ```
 
 ```twig {all|2|4|5}
@@ -172,6 +207,13 @@ Adding an image for the speaker avatar
 {{ avatar.default(avatar_path, 'img-thumbnail') }}
 ```
 
+```twig
+<!-- '@SyliusBootstrapAdminUi/shared/helper/avatar.html.twig' -->
+{% macro default(img, class) %}
+    <!-- ... -->
+{% endmacro %}
+```
+
 ---
 
 <img src="/admin_ui_speaker_avatars.png" />
@@ -179,6 +221,7 @@ Adding an image for the speaker avatar
 ---
 
 Create a talk entity
+
 ```shell
 symfony console make:entity Talk
 ```
@@ -190,11 +233,13 @@ symfony console make:entity Talk
 | speaker     | manyToOne | yes      |
 
 Create a talk form type
+
 ```php
 symfony console make:form TalkType Talk
 ```
 
 Create a talk grid
+
 ```php
 symfony console make:grid Talk
 ```
@@ -221,7 +266,7 @@ final class TalkGrid extends AbstractGrid implements ResourceAwareGridInterface
             // ...
             ->addField(
                 TwigField::create('avatar', 'speaker/grid/field/image.html.twig')
-                    ->setPath('speaker')
+                    ->setPath('speaker') // "talk.speaker"
             )
             // ...
         ;
@@ -253,8 +298,8 @@ final class TalkGrid extends AbstractGrid implements ResourceAwareGridInterface
             ->addField(
                 StringField::create('speaker')
                     ->setLabel('app.ui.speaker')
-                    ->setPath('speaker.fullName')
-                    ->setSortable(true, 'speaker.firstName')
+                    ->setPath('speaker.fullName') // "talk.speaker.fullName"
+                    ->setSortable(true, 'speaker.firstName') // for SQL query
             )
             // ...
         ;
@@ -273,7 +318,7 @@ Talks with speaker full names
 
 Adding the speaker filter
 
-```php {all|10-14|11|12|13}
+```php {all|10-15|11-12|13|11,14}
 // src/Grid/TalkGrid.php
 // ...
 final class TalkGrid extends AbstractGrid implements ResourceAwareGridInterface
@@ -284,6 +329,7 @@ final class TalkGrid extends AbstractGrid implements ResourceAwareGridInterface
         $gridBuilder
             // ...
             ->addFilter(
+                // EntityFilter is build with symfony/form EntityType
                 EntityFilter::create('speaker', Speaker::class)
                     ->setLabel('app.ui.speaker')
                     ->addFormOption('choice_label',  'fullName')
@@ -311,7 +357,7 @@ Talks with speaker filter
 
 Adding a link to speaker talks on list of speakers
 
-```php {all|10-24|11|12|13|14|15|16|17|18-21|20}
+```php {all|10-24|11-12|13|14|15|16|17|18-23|21}
 // src/Grid/SpeakerGrid.php
 // ...
 final class SpeakerGrid extends AbstractGrid implements ResourceAwareGridInterface
@@ -322,8 +368,9 @@ final class SpeakerGrid extends AbstractGrid implements ResourceAwareGridInterfa
         $gridBuilder
             // ...
             ->addActionGroup(
+                // action group on each speaker row
                 ItemActionGroup::create(
-                    Action::create('show_talks', 'show')
+                    Action::create(name: 'show_talks', type: 'show')
                         ->setIcon('list_letters')
                         ->setLabel('app.ui.show_talks')
                         ->setOptions([

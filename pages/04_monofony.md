@@ -29,10 +29,26 @@ hideInToc: true
 $ composer create-project monofony/skeleton project_name
 ```
 
+<v-clicks>
+
+* Using specific skeleton
+* Copying default features (Managing administrators and app users, default dashboard)
+
+</v-clicks>
+
 You can also add some basic endpoints with optional api-pack
 ```shell
 $ composer require monofony/api-pack
 ```
+
+<v-clicks>
+
+* Get user token (JWT authentication)
+* Change password
+* Forgotten password 
+* Get user profile
+
+</v-clicks>
 
 
 <!--

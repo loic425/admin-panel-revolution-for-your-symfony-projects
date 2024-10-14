@@ -37,172 +37,6 @@ Paweł Jędrzejewski wrote
 
 </v-clicks>
 
-[//]: # (---)
-
-[//]: # ()
-[//]: # (Back in 2016 - Grid definition)
-
-[//]: # ()
-[//]: # (```yaml {all|3|4-7|8-9|10-19|11-12|14-15|14-15,18-19|17|20-23})
-
-[//]: # (sylius_grid:)
-
-[//]: # (    grids:)
-
-[//]: # (        sylius_admin_tax_category:)
-
-[//]: # (            driver:)
-
-[//]: # (                name: doctrine/orm)
-
-[//]: # (                options:)
-
-[//]: # (                    class: '%sylius.model.tax_category.class%')
-
-[//]: # (            sorting:)
-
-[//]: # (                name: asc)
-
-[//]: # (            fields:)
-
-[//]: # (                code:)
-
-[//]: # (                    type: string)
-
-[//]: # (                    label: sylius.ui.code)
-
-[//]: # (                nameAndDescription:)
-
-[//]: # (                    type: twig)
-
-[//]: # (                    label: sylius.ui.name)
-
-[//]: # (                    path: .)
-
-[//]: # (                    options:)
-
-[//]: # (                        template: SyliusAdminBundle:Grid/Field:nameAndDescription.html.twig)
-
-[//]: # (            filters:)
-
-[//]: # (                name:)
-
-[//]: # (                    type: string)
-
-[//]: # (                    label: sylius.ui.name)
-
-[//]: # (                code:)
-
-[//]: # (                    type: string)
-
-[//]: # (                    label: sylius.ui.code)
-
-[//]: # (```)
-
-[//]: # (---)
-
-[//]: # ()
-[//]: # (Back in 2016 - Grid definition)
-
-[//]: # ()
-[//]: # (```yaml {all|5-13|6|7-8|9|10-11|12-13})
-
-[//]: # (sylius_grid:)
-
-[//]: # (    grids:)
-
-[//]: # (        sylius_admin_tax_category:)
-
-[//]: # (            # ...)
-
-[//]: # (            actions:)
-
-[//]: # (                main:)
-
-[//]: # (                    create:)
-
-[//]: # (                        type: create)
-
-[//]: # (                item:)
-
-[//]: # (                    update:)
-
-[//]: # (                        type: update)
-
-[//]: # (                    delete:)
-
-[//]: # (                        type: delete)
-
-[//]: # (```)
-
-[//]: # (---)
-
-[//]: # ()
-[//]: # (Back in 2016 - Route with grid)
-
-[//]: # ()
-[//]: # (```yaml {all|3|5|6|8})
-
-[//]: # (sylius_admin_tax_category:)
-
-[//]: # (    resource: |)
-
-[//]: # (        alias: sylius.tax_category)
-
-[//]: # (        section: admin)
-
-[//]: # (        templates: SyliusAdminBundle:Crud)
-
-[//]: # (        except: ['show'])
-
-[//]: # (        redirect: update)
-
-[//]: # (        grid: sylius_admin_tax_category)
-
-[//]: # (        vars:)
-
-[//]: # (          all:)
-
-[//]: # (              subheader: sylius.ui.manage_taxation_of_your_products)
-
-[//]: # (              templates:)
-
-[//]: # (                  form: SyliusAdminBundle:TaxCategory:_form.html.twig)
-
-[//]: # (          index:)
-
-[//]: # (              icon: tags)
-
-[//]: # (    type: sylius.resource)
-
-[//]: # (```)
-
-[//]: # (---)
-
-[//]: # ()
-[//]: # (Back in 2016 - Route with grid &#40;on API&#41;)
-
-[//]: # ()
-[//]: # (```yaml)
-
-[//]: # (sylius_api_tax_category:)
-
-[//]: # (    resource: '@SyliusApiBundle/Resources/config/routing/tax_category.yml')
-
-[//]: # (    prefix: /tax-categories)
-
-[//]: # (    resource: |)
-
-[//]: # (        alias: sylius.tax_category)
-
-[//]: # (        section: api)
-
-[//]: # (        grid: sylius_admin_tax_category)
-
-[//]: # (    type: sylius.resource_api)
-
-[//]: # (```)
-
 ---
 layout: cover
 ---
@@ -230,23 +64,26 @@ __These components give us a lot of power both for Sylius itself as well as for 
 
 ---
 
-```twig {all|2|4-5|10-11|13-22|15-16|17-18}
+```twig {all|2|5-6|8-9|13-14|16-25|18-19|21}
 <!-- src/Sylius/Bundle/AdminBundle/Resources/views/Crud/create.html.twig -->
 {% extends 'SyliusAdminBundle::layout.html.twig' %}
+<!-- ... -->
 
-{% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
-{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.new_'~metadata.name) %}
+<!-- Creating the header (eg: app.ui.new_book) -->
+{% set header = [...]|default(metadata.applicationName~'.ui.new_'~metadata.name) %}
 
+<!-- Browser page title (eg: Sylius | New book) -->
 {% block title %}{{ parent() }} {{ header|trans }}{% endblock %}
-{% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
+<!-- ... -->
 
 {% block content %}
-{{ headers.default(header|trans, configuration.vars.icon|default('plus'), configuration.vars.subheader|default(null)|trans) }}
+<!-- Displaying the header in h1 (eg: New book) -->
+{{ headers.default(header|trans, [...]) }}
 
-{{ form_start(form, {'action': path(configuration.getRouteName('create')), 'attr': {'class': 'ui form', 'novalidate': 'novalidate'}}) }}
+{{ form_start(form, [...]) }}
     <div class="ui segment">
-        {% if configuration.vars.templates.form is defined %}
-            {% include configuration.vars.templates.form %}
+        {% if [...]templates.form is defined %}
+            {% include [...]templates.form %}
         {% else %}
             {{ form_widget(form) }}
         {% endif %}
@@ -258,32 +95,30 @@ __These components give us a lot of power both for Sylius itself as well as for 
 
 ---
 
-```twig {all|2|6|10-19|21-25}
+```twig {all|2|5-6|8-9|13-14|16-17|20-22}
 <!-- src/Sylius/Bundle/AdminBundle/Resources/views/Crud/index.html.twig -->
 {% extends 'SyliusAdminBundle::layout.html.twig' %}
-
-{% import configuration.vars.templates.list as list %}
 <!-- ... -->
-{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
+
+<!-- Creating the header (eg: app.ui.books) -->
+{% set header = [...]|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
+
+<!-- Browser page title (eg: Sylius | Books) -->
 {% block title %}{{ parent() }} {{ header|trans }}{% endblock %}
 
 {% block content %}
-<div class="ui stackable two column grid">
-    <div class="column">
-        {{ headers.default(header|trans, configuration.vars.icon|default('list'), configuration.vars.subheader|default(null)|trans) }}
-    </div>
-    <div class="middle aligned column">
-        <div class="ui right floated buttons">
-            {{ buttons.create(path(configuration.getRouteName('create'))) }}
-        </div>
-    </div>
-</div>
+    <!-- ... -->
+        <!-- Displaying the header in h1 (eg: Books) -->
+        {{ headers.default(header|trans, [...]) }}
+    <!-- ... -->
+        <!-- Button link to adding new item page -->
+        {{ buttons.create(path(configuration.getRouteName('create'))) }}
 
-<div class="ui segment">
+<!-- ... -->
 {{ pagination.render(resources) }}
 {{ list.full(resources, configuration) }}
 {{ pagination.render(resources) }}
-</div>
+<!-- ... -->
 {% endblock %}
 ```
 

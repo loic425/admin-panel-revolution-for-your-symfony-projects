@@ -9,7 +9,7 @@ Let's use some Symfony UX components
 
 Add a speaker autocomplete filter
 
-```php {all|10-21|11|12|13|14|15-17|16|17|20}
+```php {all|10-21|11|12|13|14|15-17|16|17}
 // src/Grid/SpeakerGrid.php
 // ...
 final class SpeakerGrid extends AbstractGrid implements ResourceAwareGridInterface
@@ -20,7 +20,7 @@ final class SpeakerGrid extends AbstractGrid implements ResourceAwareGridInterfa
         $gridBuilder
             // ...
             ->addFilter(
-                Filter::create('speaker', 'ux_autocomplete')
+                Filter::create(name: 'speaker', type: 'ux_autocomplete')
                     ->setLabel('app.ui.speaker')
                     ->setFormOptions([
                         'multiple' => false,
@@ -48,9 +48,12 @@ Speaker filter with autocompletion
 
 Creating a Speaker Autocomplete to use on forms
 
-```php {all|4|5|7|12|13|17-20}
+```php {all|4,7|15|16|22,5}
 // src/Form/SpeakerAutocompleteType.php
 // ...
+
+use Symfony\UX\Autocomplete\Form\AsEntityAutocompleteField;
+use Symfony\UX\Autocomplete\Form\BaseEntityAutocompleteType;
 
 #[AsEntityAutocompleteField(
     alias: 'app_admin_speaker',
@@ -75,7 +78,7 @@ final class SpeakerAutocompleteType extends AbstractType
 
 ---
 
-Speaker Autocomplete on talk form type
+Use Speaker Autocomplete on talk form type
 
 ```php {all|10}
 // src/Form/TalkType.php
@@ -115,7 +118,7 @@ Speaker Autocomplete on talk form type
 
 Talk can have multiple speakers
 
-```php {all|10|12|13|14|15}
+```php {all|9-10|12|13|14|15}
 // src/Form/TalkType.php
 // ...
 
@@ -124,10 +127,10 @@ class TalkType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            // ...
+            // "symfony/form" CollectionType using LiveComponent
             ->add('speakers', LiveCollectionType::class, [
                 'label' => 'app.ui.speakers',
-                'entry_type' => SpeakerAutocompleteType::class,
+                'entry_type' => SpeakerAutocompleteType::class, // reuse the speaker autocomplete
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
@@ -157,14 +160,14 @@ class TalkFormComponent extends AbstractController
 {
     use LiveCollectionTrait;
     use DefaultActionTrait;
-    use HookableLiveComponentTrait;
+    use HookableLiveComponentTrait; // for Sylius Twig Hooks
 
     #[LiveProp]
-    public Talk $initialFormData;
+    public Talk $resource;
 
     protected function instantiateForm(): FormInterface
     {
-        return $this->createForm(TalkType::class, $this->initialFormData);
+        return $this->createForm(TalkType::class, $this->resource);
     }
 }
 
@@ -183,20 +186,22 @@ sylius_twig_hooks:
                 component: 'App\Twig\Component\TalkFormComponent'
                 props:
                     form: '@=_context.form'
-                    initialFormData: '@=_context.resource'
+                    resource: '@=_context.resource'
 
         'sylius_admin.talk.update.content':
             form:
                 component: 'App\Twig\Component\TalkFormComponent'
                 props:
                     form: '@=_context.form'
-                    initialFormData: '@=_context.resource'
+                    resource: '@=_context.resource'
 
 ```
 
 ---
 
-<img src="/live-collection.png"/>
+<video width="800" controls autoplay>
+  <source src="/live_collection.webm" type="video/mp4">
+</video>
 
 ---
 layout: center
@@ -206,7 +211,7 @@ Two more filters...
 
 ---
 
-```php {all|3,14-17|18-25}
+```php {all|3,14-17|18-26}
 // src/Grid/TalkGrid.php
 // ...
 use Sylius\Bundle\GridBundle\Builder\Filter\DateFilter;
@@ -225,6 +230,7 @@ final class TalkGrid extends AbstractGrid implements ResourceAwareGridInterface
                     ->setLabel('app.ui.starts_at'),
             )
             ->addFilter(
+                // "symfony/form" ChoiceType
                 SelectFilter::create('track', [
                     'app.ui.biz' => Track::BIZ->value,
                     'app.ui.tech_one' => Track::TECH_ONE->value,
