@@ -84,6 +84,14 @@ Do not forget to accept contrib recipes
 
 ---
 
+Import Tom Select default css
+
+```shell
+symfony console importmap:require tom-select/dist/css/tom-select.default.css
+```
+
+---
+
 <img src="/enjoy.png"/>
 
 ---
