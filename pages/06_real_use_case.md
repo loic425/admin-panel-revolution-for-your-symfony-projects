@@ -199,7 +199,7 @@ public function buildGrid(GridBuilderInterface $gridBuilder): void
 }
 ```
 
-```twig {all|2|4|5}
+```twig {no|2|4|5}
 <!-- templates/speaker/grid/field/image.html.twig -->
 {% import '@SyliusBootstrapAdminUi/shared/helper/avatar.html.twig' as avatar %}
 
