@@ -65,65 +65,6 @@ Editing existing item
 
 <img src="/admin_ui_update.png"/>
 
-[//]: # (---)
-
-[//]: # (Configure your resource)
-
-[//]: # ()
-[//]: # (```php {all|10|12|13|15-21})
-
-[//]: # (namespace App\Entity;)
-
-[//]: # ()
-[//]: # (use App\Grid\BookGrid;)
-
-[//]: # (use App\Repository\BookRepository;)
-
-[//]: # (use Sylius\Component\Resource\Model\ResourceInterface;)
-
-[//]: # (use Sylius\Resource\Metadata\AsResource;)
-
-[//]: # (// ...)
-
-[//]: # ()
-[//]: # (#[ORM\Entity&#40;repositoryClass: BookRepository::class&#41;])
-
-[//]: # (#[AsResource&#40;)
-
-[//]: # (    section: 'admin',)
-
-[//]: # (    templatesDir: '@SyliusAdminUi/crud',)
-
-[//]: # (    routePrefix: '/admin',)
-
-[//]: # (    pluralName: 'library',)
-
-[//]: # (    operations: [)
-
-[//]: # (        new Create&#40;&#41;,)
-
-[//]: # (        new Update&#40;&#41;,)
-
-[//]: # (        new Index&#40;grid: BookGrid::class&#41;,)
-
-[//]: # (        new Delete&#40;&#41;,)
-
-[//]: # (        new BulkDelete&#40;&#41;,)
-
-[//]: # (    ],)
-
-[//]: # (&#41;])
-
-[//]: # (class Book implements ResourceInterface)
-
-[//]: # ({)
-
-[//]: # (    // ...)
-
-[//]: # (})
-
-[//]: # (```)
-
 ---
 layout: center
 class: text-center
@@ -263,7 +204,7 @@ Hooking templates to change logo on the layout
 
 __Hook__
 
-```yaml {all|4|5|6}
+```yaml {all|4|5|6-7}
 ## config/packages/twig_hooks.yaml
 sylius_twig_hooks:
     hooks:

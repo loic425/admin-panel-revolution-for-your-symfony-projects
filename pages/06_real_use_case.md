@@ -207,7 +207,7 @@ public function buildGrid(GridBuilderInterface $gridBuilder): void
 {{ avatar.default(avatar_path, 'img-thumbnail') }}
 ```
 
-```twig
+```twig{no|all}
 <!-- '@SyliusBootstrapAdminUi/shared/helper/avatar.html.twig' -->
 {% macro default(img, class) %}
     <!-- ... -->
@@ -231,6 +231,8 @@ symfony console make:entity Talk
 | title       | string    | no       |
 | description | text      | yes      |
 | speaker     | manyToOne | yes      |
+
+---
 
 Create a talk form type
 
@@ -265,7 +267,7 @@ final class TalkGrid extends AbstractGrid implements ResourceAwareGridInterface
         $gridBuilder
             // ...
             ->addField(
-                TwigField::create('avatar', 'speaker/grid/field/image.html.twig')
+                TwigField::create(name: 'avatar', template: 'speaker/grid/field/image.html.twig')
                     ->setPath('speaker') // "talk.speaker"
             )
             // ...
@@ -357,7 +359,7 @@ Talks with speaker filter
 
 Adding a link to speaker talks on list of speakers
 
-```php {all|10-24|11-12|13|14|15|16|17|18-23|21}
+```php {all|10-24|11-12|13|14|15|16|17-18|19|21-23}
 // src/Grid/SpeakerGrid.php
 // ...
 final class SpeakerGrid extends AbstractGrid implements ResourceAwareGridInterface
@@ -374,11 +376,12 @@ final class SpeakerGrid extends AbstractGrid implements ResourceAwareGridInterfa
                         ->setIcon('list_letters')
                         ->setLabel('app.ui.show_talks')
                         ->setOptions([
+                            // Link to talk grid with query params
                             'link' => [
                                 'route' => 'app_admin_talk_index',
                                 'parameters' => [
                                     'criteria' => [
-                                        'speaker' => 'resource.id',
+                                        'speaker' => 'resource.id', // current speaker id
                                     ],
                                 ],
                             ],
