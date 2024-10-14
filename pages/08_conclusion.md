@@ -86,6 +86,10 @@ Do not forget to accept contrib recipes
 
 <img src="/enjoy.png"/>
 
+---
+
+<img src="/admin_login.png"/>
+
 
 ---
 layout: center
