@@ -104,3 +104,11 @@ layout: center
 ---
 
 Now it's your turn...
+
+---
+layout: center
+---
+
+Demo of the real use case project:
+
+https://github.com/loic425/sylius-stack-demo
