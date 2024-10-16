@@ -195,7 +195,7 @@ Sorted by first name
 
 Sorted by company name
 
-<img src="/admin_ui_sorted_by_company_name.png" />
+<img src="/admin_ui_sorted_by_company_name2.png" />
 
 
 ---
