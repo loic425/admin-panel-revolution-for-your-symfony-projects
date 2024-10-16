@@ -93,18 +93,55 @@ flowchart LR
 ```
 
 ---
+layout: two-cols
+---
+
+Twig hooks auto-prefixes overview
+
+```mermaid {scale: 0.7}
+flowchart
+    Template([Twig template]) --> HookLuke
+    HookLuke{hook 'luke'} --> TemplateFather
+    HookLuke{hook 'luke'} --> TemplateEnnemy
+
+    TemplateFather([template_with_father_hook]) --> Hook2{hook 'father'}
+    TemplateEnnemy([template_with_ennemy_hook]) --> Hook3{hook 'ennemy'}
+
+    Hook2{hook 'father'} --> Template3([template1])
+    Hook2{hook 'father'} --> Template4([template2]) 
+```
+
+::right::
+
+```yaml
+sylius_twig_hooks:
+    hooks:
+        'luke':
+            template_with_father_hook:
+                template: # ...
+            template_with_ennemy_hook:
+                template: # ...
+        'luke.father':
+            template1:
+                template: # ...
+            template2:
+                template: # ...
+        'luke.ennemy':
+```        
+
+---
 
 Twig hooks overview for index pages
 
 ```mermaid
 flowchart LR
-    Template(index.html.twig) --> Hook2{sylius_admin.common.index}
+    Template(index.html.twig) --> Hook2{index}
     
     Hook2 --> Sidebar([index/sidebar.html.twig])
     Hook2--> Navbar([index/navbar.html.twig])
     Hook2 --> Content([index/content.html.twig])
 
-    Content --> Hook3{sylius_admin.common.index.content}
+    Content --> Hook3{content}
 
     Hook3 --> Flashes(index/content/flashes.html.twig)
     Hook3 --> Header(index/content/header.html.twig)

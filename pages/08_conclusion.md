@@ -112,3 +112,6 @@ layout: center
 Demo of the real use case project:
 
 https://github.com/loic425/sylius-stack-demo
+<div align="center">
+<img src="/demo_link.png" width="250"/>
+</div>

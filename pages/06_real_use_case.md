@@ -331,7 +331,7 @@ final class TalkGrid extends AbstractGrid implements ResourceAwareGridInterface
         $gridBuilder
             // ...
             ->addFilter(
-                // EntityFilter is build with symfony/form EntityType
+                // EntityFilter is built with symfony/form EntityType
                 EntityFilter::create('speaker', Speaker::class)
                     ->setLabel('app.ui.speaker')
                     ->addFormOption('choice_label',  'fullName')
