@@ -73,9 +73,13 @@ symfony console make:grid Speaker
 ```
 
 ---
+layout: two-cols-header
+---
 
 Declare entity as a Sylius resource
 & add your basic operations
+
+::left::
 
 ```php {all|2|3|4|5|6|7-13|8|9|10|11|12|15}
 #[ORM\Entity(repositoryClass: SpeakerRepository::class)]
@@ -93,6 +97,19 @@ Declare entity as a Sylius resource
     ],
 )]
 class Speaker implements ResourceInterface
+```
+
+::right::
+
+```shell
+ ------------------------------ ---------------------------
+  Name                           Path                                           
+ ------------------------------ ---------------------------         
+  app_admin_speaker_create      /admin/speakers/new                            
+  app_admin_speaker_update      /admin/speakers/{id}/edit                      
+  app_admin_speaker_index       /admin/speakers                                
+  app_admin_speaker_delete      /admin/speakers/{id}/delete                    
+  app_admin_speaker_bulk_delete /bulk_delete     
 ```
 
 ---
