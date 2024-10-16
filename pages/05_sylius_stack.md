@@ -27,7 +27,7 @@ Searching menu items in sidebar
 
 Filtering grid data
 
-<img src="/admin_ui_filters.png"/>
+<img src="/admin_ui_filters2.png"/>
 
 ---
 
@@ -39,19 +39,19 @@ Deleting grid item
 
 Deleting multiple grid items
 
-<img src="/admin_ui_bulk_delete.png"/>
+<img src="/admin_ui_bulk_delete2.png"/>
 
 ---
 
 Sorting grid data
 
-<img src="/admin_ui_sorting.png"/>
+<img src="/admin_ui_sorting2.png"/>
 
 ---
 
 Paginating grid data
 
-<img src="/admin_ui_pagination.png"/>
+<img src="/admin_ui_pagination2.png"/>
 
 ---
 
@@ -216,7 +216,7 @@ sylius_twig_hooks:
 ```
 
 __Template__
-```html
+```html{no|all}
 <!-- templates/book/index/content/header/description.html.twig -->
 <p class="mt-3">
     Aliquam arcu ligula, aliquet vitae malesuada quis, accumsan nec metus. Proin lacinia dolor eu convallis mollis. Phasellus quis laoreet ex. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent vestibulum dolor est, vel tristique sapien sodales eget. In hac habitasse platea dictumst. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis vitae viverra leo, vel consectetur tellus. Sed ipsum risus, pharetra id tincidunt et, ultricies at nisl. Morbi nec ultrices elit, vitae vehicula lectus. Nullam venenatis condimentum dui ut vehicula. Vivamus sit amet pharetra justo. Sed sit amet quam nisi.
@@ -233,7 +233,7 @@ __Template__
 
 ---
 
-<img src="/admin_ui_index_hooks_result_debug.png"/>
+<img src="/admin_ui_index_hooks_result_debug2.png"/>
 
 ---
 
@@ -254,7 +254,7 @@ sylius_twig_hooks:
 
 __Template__
 
-```html {all|2|5|6|7}
+```html {no|2|5|6|7}
 <!-- templates/shared/crud/common/sidebar/logo.html.twig -->
 {% set dashboard_path = [...]|default('/admin') %}
 

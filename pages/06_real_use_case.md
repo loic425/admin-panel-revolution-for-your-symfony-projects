@@ -81,7 +81,7 @@ Declare entity as a Sylius resource
 
 ::left::
 
-```php {all|2|3|4|5|6|7-13|8|9|10|11|12|15}
+```php {all|2|3|4|5|6|7-13|8|9|10|11|12|15|no}
 #[ORM\Entity(repositoryClass: SpeakerRepository::class)]
 #[AsResource(
     section: 'admin',
@@ -101,7 +101,7 @@ class Speaker implements ResourceInterface
 
 ::right::
 
-```shell
+```shell{no|all}
  ------------------------------ ---------------------------
   Name                           Path                                           
  ------------------------------ ---------------------------         
@@ -189,7 +189,7 @@ transition: fade
 
 Sorted by first name
 
-<img src="/admin_ui_default_sorting.png" />
+<img src="/admin_ui_default_sorting2.png" />
 
 ---
 
@@ -376,7 +376,7 @@ Talks with speaker filter
 
 Adding a link to speaker talks on list of speakers
 
-```php {all|10-24|11-12|13|14|15|16|17-18|19|21-23}
+```php {all|10-24|11-12|13|15-16|17|18|19-21}
 // src/Grid/SpeakerGrid.php
 // ...
 final class SpeakerGrid extends AbstractGrid implements ResourceAwareGridInterface
@@ -387,11 +387,9 @@ final class SpeakerGrid extends AbstractGrid implements ResourceAwareGridInterfa
         $gridBuilder
             // ...
             ->addActionGroup(
-                // action group on each speaker row
+                // action group allows to configure actions on each speaker row
                 ItemActionGroup::create(
                     Action::create(name: 'show_talks', type: 'show')
-                        ->setIcon('list_letters')
-                        ->setLabel('app.ui.show_talks')
                         ->setOptions([
                             // Link to talk grid with query params
                             'link' => [
