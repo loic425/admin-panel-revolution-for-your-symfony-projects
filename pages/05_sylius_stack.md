@@ -12,6 +12,30 @@ To The Rescue
 </div>
 
 ---
+layout: two-cols-header
+---
+
+## Sylius Stack
+
+::left::
+
+<v-clicks>
+
+- Set of tools for your Symfony projects
+- Maintained by the Sylius core team members
+- Embrace the Symfony ecosystem
+- Symfony UX usage
+
+</v-clicks>
+
+::right::
+
+<img src="/sylius_stack_github.png"/>
+
+
+
+
+---
 
 ## Admin UI
 
@@ -247,7 +271,7 @@ sylius_twig_hooks:
     hooks:
         'sylius_admin.common.component.sidebar':
             logo:
-                #template: '@SyliusBootstrapAdminUi/security/common/logo.html.twig'
+                #template: '@SyliusBootstrapAdminUi/shared/crud/common/sidebar/logo.html.twig'
                 template: 'shared/crud/common/sidebar/logo.html.twig'
 
 ```
