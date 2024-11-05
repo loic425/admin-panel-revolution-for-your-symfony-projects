@@ -4,7 +4,7 @@ layout: center
 
 # Real use case
 
-Let's create an AFUP admin panel
+Let's create an admin panel to manage conference talks
 
 ---
 
