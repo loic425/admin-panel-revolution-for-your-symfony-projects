@@ -9,6 +9,8 @@ To The Rescue
 
 <img align="center" src="https://i.giphy.com/6IanN6Nqj0JFK.webp"/>
 
+Monofony replacement? almost...
+
 </div>
 
 ---
@@ -31,9 +33,6 @@ layout: two-cols-header
 ::right::
 
 <img src="/sylius_stack_github.png"/>
-
-
-
 
 ---
 
@@ -137,7 +136,7 @@ flowchart
 
 ::right::
 
-```yaml
+```yaml {none|3|4,8|6,13}
 sylius_twig_hooks:
     hooks:
         'luke':
@@ -269,25 +268,18 @@ __Hook__
 ## config/packages/twig_hooks.yaml
 sylius_twig_hooks:
     hooks:
-        'sylius_admin.common.component.sidebar':
-            logo:
-                #template: '@SyliusBootstrapAdminUi/shared/crud/common/sidebar/logo.html.twig'
-                template: 'shared/crud/common/sidebar/logo.html.twig'
+        'sylius_admin.common.component.sidebar.logo':
+            image:
+                #template: '@SyliusBootstrapAdminUi/shared/crud/common/sidebar/logo/image.html.twig'
+                template: 'shared/crud/common/sidebar/logo/image.html.twig'
 
 ```
 
 __Template__
 
 ```html {no|2|5|6|7}
-<!-- templates/shared/crud/common/sidebar/logo.html.twig -->
-{% set dashboard_path = [...]|default('/admin') %}
-
-<h1 class="navbar-brand">
-    <a href="{{ dashboard_path }}" style="text-decoration: none">
-        <img src="{{ asset('afup-icon-color.png') }}" alt="AFUP logo" class="navbar-brand-image" />
-        AFUP
-    </a>
-</h1>
+<!-- templates/shared/crud/common/sidebar/logo/image.html.twig -->
+<img src="{{ asset('afup-icon-color.png') }}" alt="AFUP logo" class="navbar-brand-image" />
 
 ```
 

@@ -7,45 +7,6 @@ Let's use some Symfony UX components
 
 ---
 
-Add a speaker autocomplete filter
-
-```php {all|10-21|11|12|13|14|15-17|16|17}
-// src/Grid/SpeakerGrid.php
-// ...
-final class SpeakerGrid extends AbstractGrid implements ResourceAwareGridInterface
-{
-    // ...
-    public function buildGrid(GridBuilderInterface $gridBuilder): void
-    {
-        $gridBuilder
-            // ...
-            ->addFilter(
-                Filter::create(name: 'speaker', type: 'ux_autocomplete')
-                    ->setLabel('app.ui.speaker')
-                    ->setFormOptions([
-                        'multiple' => false,
-                        'extra_options' => [
-                            'class' => Speaker::class,
-                            'choice_label' => 'fullName',
-                        ],
-                    ])
-                    ->setOptions(['fields' => ['speaker.id']])
-            )
-            // ...
-        ;
-    }
-    // ...
-}
-```
-
----
-
-Speaker filter with autocompletion
-
-<img src="/filter_with_ux_autocomplete.png" />
-
----
-
 Creating a Speaker Autocomplete to use on forms
 
 ```php {all|4,7|15|16|22,5}
@@ -116,7 +77,57 @@ Speaker Autocomplete on talk form type
 
 ---
 
+Add a speaker autocomplete filter
+
+```php {all|10-21|11|12|13|14|15-17|16|17}
+// src/Grid/SpeakerGrid.php
+// ...
+final class SpeakerGrid extends AbstractGrid implements ResourceAwareGridInterface
+{
+    // ...
+    public function buildGrid(GridBuilderInterface $gridBuilder): void
+    {
+        $gridBuilder
+            // ...
+            ->addFilter(
+                Filter::create(name: 'speaker', type: 'ux_autocomplete')
+                    ->setLabel('app.ui.speaker')
+                    ->setFormOptions([
+                        'multiple' => false,
+                        'extra_options' => [
+                            'class' => Speaker::class,
+                            'choice_label' => 'fullName',
+                        ],
+                    ])
+                    ->setOptions(['fields' => ['speaker.id']])
+            )
+            // ...
+        ;
+    }
+    // ...
+}
+```
+
+---
+
+Speaker filter with autocompletion
+
+<img src="/filter_with_ux_autocomplete.png" />
+
+---
+
 Talk can have multiple speakers
+
+<v-clicks>
+
+* speakers with ManyToMany on talk entity
+* we use a form collection to try Twig Live Components
+* add button to add a new speaker form field
+* remove button to remove an existing form field
+
+</v-clicks>
+
+---
 
 ```php {all|9-10|12|13|14|15}
 // src/Form/TalkType.php
@@ -226,12 +237,12 @@ final class TalkGrid extends AbstractGrid implements ResourceAwareGridInterface
         $gridBuilder
             // ...
             ->addFilter(
-                DateFilter::create('startsAt')
+                DateFilter::create('startsAt') // for the talk starting date
                     ->setLabel('app.ui.starts_at'),
             )
             ->addFilter(
                 // "symfony/form" ChoiceType
-                SelectFilter::create('track', [
+                SelectFilter::create('track', [ // for the talk tracks
                     'app.ui.biz' => Track::BIZ->value,
                     'app.ui.tech_one' => Track::TECH_ONE->value,
                     'app.ui.tech_two' => Track::TECH_TWO->value,

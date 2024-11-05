@@ -15,10 +15,10 @@ image: /profiler.png
 - PHP 8.3 support
 - Fewer dependencies on third party packages
 - No dependencies on Sylius E-commerce packages
-- DDD architecture ready
-    - Resource detached from the Doctrine entity
-    - Query bus on providers
-    - Command bus on processors
+- Resource management is DDD architecture ready
+    - Resource can be detached from the Doctrine entity
+    - Use your query bus on providers
+    - Use your command bus on processors
 - Installable on existing projects  
 
 </v-clicks>
@@ -31,9 +31,12 @@ image: /profiler.png
 
 - Writing documentation
 - Adding Doctrine orm 3 support
-- Adding UX autocomplete grid filter
-- Using these packages on Monofony
-- Using these packages on Sylius E-commerce
+- Adding UX autocomplete grid filter (only implemented in the Demo application)
+- Using these new packages on Sylius E-commerce 
+  - TwigHooks ✔️
+  - TwigExtra ✔️
+  - AdminUi ❌
+  - BootstrapAdminUi ❌
 - Grid with UX Live Component
 
 </v-clicks>
