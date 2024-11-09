@@ -7,7 +7,7 @@ hideInToc: true
 # Loïc Frémont
 
 * Technical Expert @Akawaka
-* Core Team Member @Sylius
+* Member of the @Sylius leaders
 * Monofony creator
 
 <!--

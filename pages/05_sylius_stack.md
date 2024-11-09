@@ -24,7 +24,7 @@ layout: two-cols-header
 <v-clicks>
 
 - Set of tools for your Symfony projects
-- Maintained by the Sylius core team members
+- Maintained by the Sylius leaders
 - Embrace the Symfony ecosystem
 - Symfony UX usage
 

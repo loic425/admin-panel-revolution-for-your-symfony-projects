@@ -2,6 +2,8 @@
 layout: center
 ---
 
+# Conclusion
+
 Now it's time to conclude
 
 ---
@@ -65,13 +67,13 @@ Install all the packages (For now)
 composer require \
   "doctrine/doctrine-bundle" "^2.12" \
   "doctrine/orm" "^2.0" \
-  "sylius/admin-ui" "^0.4" \
-  "sylius/bootstrap-admin-ui" "^0.4" \
+  "sylius/admin-ui" \
+  "sylius/bootstrap-admin-ui" \
   "sylius/grid-bundle" "^1.13" \
   "sylius/resource-bundle": "^1.12" \
-  "sylius/twig-extra" "^0.4" \
-  "sylius/twig-hooks" "^0.4" \
-  "sylius/ui-translations" "^0.4"
+  "sylius/twig-extra" \
+  "sylius/twig-hooks" \
+  "sylius/ui-translations"
 ```
 
 Do not forget to accept contrib recipes
